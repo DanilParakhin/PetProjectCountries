@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_goback"
+        android:orderInCategory="100"
+        android:title="@string/back"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_goforward"
+        android:orderInCategory="100"
+        android:title="@string/forward"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_reload"
+        android:orderInCategory="100"
+        android:title="@string/reload_page"
+        app:showAsAction="never"/>
+
+
+</menu>
