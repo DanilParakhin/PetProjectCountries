@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
 		dbCreateObservable = (DBCreateObservable) getApplication();
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 		int[] toCountries = new int[]{R.id.spinner_text_view};
 		int[] toCities = new int[]{R.id.list_view_text_view};
 
-		spinnerCountries = (Spinner) findViewById(R.id.main_activity_spinner_countries);
+		spinnerCountries = findViewById(R.id.main_activity_spinner_countries);
 		spinnerAdapter = new SimpleCursorAdapter(this, R.layout.spinner_item, null, fromCountries, toCountries, 0);
 		spinnerCountries.setAdapter(spinnerAdapter);
 		spinnerCountries.setPrompt("Set country");
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 		spinnerCountries.setSelection(0);
 
 
-		listViewCities = (ListView) findViewById(R.id.main_activity_list_view_cities);
+		listViewCities = findViewById(R.id.main_activity_list_view_cities);
 		listViewAdapter = new SimpleCursorAdapter(this, R.layout.list_view_item, null, fromCities, toCities, 0);
 		listViewCities.setAdapter(listViewAdapter);
 		listViewCities.setOnItemClickListener(this);
@@ -84,13 +84,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 		cityLoaderBundle = new Bundle();
 		cityLoaderBundle.putLong(KEY_COUNTRY_ID, spinnerCountries.getSelectedItemId());
-		searchView = (SearchView) findViewById(R.id.main_activity_edit_text_search);
+
+		searchView = findViewById(R.id.main_activity_edit_text_search);
 		searchView.setOnQueryTextListener(this);
 		searchView.setIconified(false);
 		searchView.setQueryHint(getResources().getString(R.string.start_enter_city_name));
 		searchView.setVisibility(View.GONE);
 
-		fab = (FloatingActionButton) findViewById(R.id.main_activity_fab);
+		fab = findViewById(R.id.main_activity_fab);
 		fab.setVisibility(View.GONE);
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -104,8 +105,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 	}
 
 	@Override
-	protected void onDestroy() {
+	protected void onRestart() {
+		super.onRestart();
+		if (!localDatabase.getDb().isOpen()){
+			localDatabase.openDb();
+		}
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
 		localDatabase.closeDb();
+	}
+
+	@Override
+	protected void onDestroy() {
 		dbCreateObservable.removeObserver(this);
 		super.onDestroy();
 	}

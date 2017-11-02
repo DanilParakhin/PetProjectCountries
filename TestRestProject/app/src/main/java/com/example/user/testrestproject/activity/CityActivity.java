@@ -45,7 +45,7 @@ public class CityActivity extends AppCompatActivity implements LoaderManager.Loa
 			cityName = extras.getString(KEY_CITY);
 		}
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		Toolbar toolbar = findViewById(R.id.toolbar);
 		toolbar.setTitle(cityName);
 		setSupportActionBar(toolbar);
 		toolbar.setNavigationIcon(R.drawable.ic_action_back);
@@ -57,7 +57,7 @@ public class CityActivity extends AppCompatActivity implements LoaderManager.Loa
 		});
 
 
-		citiesRecyclerView = (RecyclerView) findViewById(R.id.city_activity_recycler_view);
+		citiesRecyclerView = findViewById(R.id.city_activity_recycler_view);
 		citiesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 		adapter = new CitiesRecyclerViewAdapter(new ArrayList<CityInfoModel>(), this);
 		citiesRecyclerView.setAdapter(adapter);

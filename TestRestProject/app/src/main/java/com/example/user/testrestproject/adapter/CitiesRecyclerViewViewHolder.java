@@ -25,11 +25,11 @@ class CitiesRecyclerViewViewHolder extends RecyclerView.ViewHolder implements Vi
 		super(itemView);
 		this.listener = listener;
 
-		cardView = (CardView) itemView.findViewById(R.id.recycler_card_view);
-		imageView = (ImageView) itemView.findViewById(R.id.holder_image_view);
-		textViewTitle = (TextView) itemView.findViewById(R.id.holder_text_view_title);
-		textViewSubTitle = (TextView) itemView.findViewById(R.id.holder_text_view_subtitle);
-		textViewSummary = (TextView) itemView.findViewById(R.id.holder_text_view_summary);
+		cardView = itemView.findViewById(R.id.recycler_card_view);
+		imageView = itemView.findViewById(R.id.holder_image_view);
+		textViewTitle = itemView.findViewById(R.id.holder_text_view_title);
+		textViewSubTitle = itemView.findViewById(R.id.holder_text_view_subtitle);
+		textViewSummary = itemView.findViewById(R.id.holder_text_view_summary);
 		cardView.setOnClickListener(this);
 
 	}
